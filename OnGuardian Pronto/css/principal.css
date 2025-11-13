@@ -9,8 +9,8 @@
 .nome-onguardian {
   color: blueviolet;
   position: absolute;
-  top: 2%;
-  left: 4.9%;
+  top: 1%;
+  left: 4.6%;
 }
 .nome-onguardian span {
   color: aliceblue;
@@ -98,7 +98,7 @@
     left: 3%;
   }
   .nome-onguardian {
-    top: 2%;
+    top: 5%;
     left: 9%;
     font-size: 18px;
   }
@@ -132,29 +132,29 @@
     left: 4%;
   }
   .nome-onguardian {
-    top: 2%;
-    left: 12%;
+    top: 3%;
+    left: 14%;
     font-size: 16px;
   }
   .text1 {
     font-size: 28px;
-    top: 18%;
+    top: 10%;
     left: 8%;
     transform: translateX(0);
   }
   .text2 {
     font-size: 18px;
-    top: 38%;
+    top: 25%;
     left: 8%;
   }
   .text3 {
     font-size: 18px;
-    top: 50%;
+    top: 35%;
     left: 8%;
   }
   .text4 {
     font-size: 13px;
-    top: 68%;
+    top: 50%;
     left: 8%;
   }
 }
@@ -162,4 +162,3 @@ html, body {
   overflow: auto !important;
   height: auto !important;
 }
-

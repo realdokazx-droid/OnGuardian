@@ -9,8 +9,8 @@
 .nome-onguardian {
   color: blueviolet;
   position: absolute;
-  top: 1%;
-  left: 4.6%;
+  top: 2%;
+  left: 4.9%;
 }
 .nome-onguardian span {
   color: aliceblue;
@@ -162,3 +162,4 @@ html, body {
   overflow: auto !important;
   height: auto !important;
 }
+

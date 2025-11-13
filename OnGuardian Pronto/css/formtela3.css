@@ -110,7 +110,7 @@
   background-color: rgba(255, 255, 255, 0.08);
   padding: 15px 20px;
   border-radius: 12px;
-  max-width: 320px;
+  max-width: 200px;
   display: none;
   transition: all 0.4s ease;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
@@ -150,7 +150,7 @@
   }
 
   .input-wrapper {
-    top: 66%;
+    top: 40%;
     left: 6%;
     flex-direction: column;
     height: auto;
@@ -169,8 +169,8 @@
   }
 
   .resultado {
-    top: 62%;
+    top: 40%;
     left: 6%;
-    max-width: 90%;
+    max-width: 200px;
   }
 }

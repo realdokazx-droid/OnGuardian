@@ -2,132 +2,157 @@ const verifyBtn = document.getElementById("verifyBtn");
 const resultBox = document.getElementById("resultBox");
 const resultText = document.getElementById("resultText");
 
-// ======== BASES DE FONTES =========
+// ==============================
+// 🔵 BASE DE DADOS
+// ==============================
 const trustedSources = [
   "bbc.com", "cnn.com", "reuters.com", "g1.globo.com", "nytimes.com",
   "folha.uol.com.br", "uol.com.br", "estadao.com.br", "theguardian.com",
-  "apnews.com", "npr.org", "elpais.com", "dw.com", "cnnbrasil.com.br",
-  "washingtonpost.com", "r7.com", "oglobo.globo.com", "bbcbrasil.com",
-  "forbes.com", "time.com", "wired.com", "nationalgeographic.com"
+  "apnews.com", "elpais.com", "dw.com", "cnnbrasil.com.br",
+  "washingtonpost.com", "r7.com", "oglobo.globo.com", "time.com",
+  "wired.com", "npr.org", "forbes.com"
+];
+
+const mediumReliableSources = [
+  "metropoles.com", "terra.com.br", "yahoo.com", "ig.com.br",
+  "msn.com", "record.com.br"
 ];
 
 const blacklistedSources = [
-  "huzlers.com", "worldnewsdailyreport.com", "theonion.com", "clickhole.com",
-  "24horasnews.net", "saudeemfoco.club", "diariodobrasil.org",
-  "noticiasonline.club", "newsner.com", "sensacionalista.com.br",
-  "revistaplaneta.club", "metropolesfake.com", "folhadiario.club"
+  "huzlers.com", "worldnewsdailyreport.com", "theonion.com",
+  "clickhole.com", "sensacionalista.com.br", "diariodobrasil.org",
+  "noticiasonline.club", "24horasnews.net", "saudeemfoco.club",
+  "metropolesfake.com", "folhadiario.club"
 ];
 
 const suspiciousWords = {
-  "chocante": 2, "urgente": 2, "você não vai acreditar": 3, "exclusivo": 1,
-  "revelado": 1, "bomba": 2, "escândalo": 2, "milagre": 3, "absurdo": 2,
-  "polêmica": 1, "explosivo": 2, "inacreditável": 3, "proibido": 1,
-  "cientistas confirmam": 2, "cura": 3, "alerta": 2, "vazou": 2,
-  "fim do mundo": 3, "segredo": 2, "descubra": 2, "verdade oculta": 3
+  "chocante": 2, "urgente": 3, "você não vai acreditar": 4,
+  "exclusivo": 1, "revelado": 1, "bomba": 3, "escândalo": 3,
+  "milagre": 4, "absurdo": 2, "polêmica": 1, "explosivo": 2,
+  "inacreditável": 3, "proibido": 1, "cientistas confirmam": 3,
+  "cura": 4, "alerta": 3, "vazou": 2, "fim do mundo": 5,
+  "segredo": 2, "verdade oculta": 4
 };
 
-// ======== FUNÇÕES DE ANÁLISE =========
+const journalismPatterns = [
+  "segundo","de acordo com","investigação aponta",
+  "relatório diz","estudo mostra","pesquisadores afirmam",
+  "dados oficiais","apurou que","confirmou que"
+];
+
+// ==============================
+// 🔵 SENSORES
+// ==============================
 function emotionSensor(text) {
-  const alarm = ["urgente", "alerta", "bomba", "choque", "escândalo"];
-  let score = 0, emotion = "neutro";
-  for (const w of alarm) if (text.includes(w)) score -= 10;
-  if (score < -5) emotion = "alarmista";
-  return { score, emotion };
+  const alarm = ["urgente","bomba","choque","escândalo","pânico"];
+  let score = 0;
+  alarm.forEach(w => { if (text.includes(w)) score -= 12; });
+
+  return {
+    emotion: score < -10 ? "extremamente alarmista" :
+             score < -5 ? "alarmista" : "neutro",
+    score
+  };
+}
+
+function journalismCheck(text) {
+  let points = 0;
+  journalismPatterns.forEach(p => {
+    if (text.includes(p)) points += 5;
+  });
+  return points;
 }
 
 function evidenceRadar(text) {
-  const evid = ["foto", "imagem", "vídeo", "documento", "pesquisa", "dados", "estudo", "relatório", "fonte"];
+  const evid = [
+    "foto","imagem","vídeo","documento","pesquisa",
+    "dados","estudo","relatório","fonte oficial"
+  ];
   let found = evid.filter(w => text.includes(w));
-  let score = found.length > 0 ? found.length * 3 : -8;
-  return { found, score };
+  return found.length ? found.length * 4 : -10;
 }
 
-// ======== EVENTO PRINCIPAL =========
+function fakeDomainDetector(domain) {
+  const patterns = ["-news","viral","alerta","urgente","hoje","24h"];
+  return patterns.some(p => domain.includes(p)) ? -15 : 0;
+}
+
+function crossCheckSimulation(domain) {
+  if (trustedSources.some(s => domain.includes(s))) return +20;
+  if (blacklistedSources.some(s => domain.includes(s))) return -30;
+  return 0;
+}
+
+// ==============================
+// 🔵 EVENTO PRINCIPAL
+// ==============================
 verifyBtn.addEventListener("click", async () => {
   const link = document.getElementById("newsLink").value.trim();
-  if (!link) return showResult("⚠️ Por favor, insira um link.", "orange");
+  if (!link) return showSimple("⚠️ Por favor, insira um link.", "orange");
 
   const domain = extractDomain(link);
-  if (!domain) return showResult("❌ Link inválido.", "red");
-
-  resultBox.style.display = "block";
-  resultText.innerHTML = `
-  <div class="scan-line"></div>
-  <p class="scan-text">🔍 Iniciando análise da notícia...</p>`;
-
-  const pause = (ms) => new Promise(r => setTimeout(r, ms));
-  let score = 50;
   const lowered = link.toLowerCase();
+  let score = 50;
 
-  // ========= ETAPA 1: FONTE =========
-  await pause(1000);
-  addStep("🕵️ Analisando a fonte...");
-  await pause(800);
-  if (trustedSources.some(s => domain.includes(s))) {
-    score += 35;
-    addStep("✅ Fonte confiável detectada: <b>" + domain + "</b>");
-  } else if (blacklistedSources.some(s => domain.includes(s))) {
-    score -= 45;
-    addStep("🚫 Fonte suspeita detectada: <b>" + domain + "</b>");
-  } else {
-    addStep("❓ Fonte desconhecida: <b>" + domain + "</b>");
-  }
+  // Limpa e mostra caixa
+  resultBox.style.display = "block";
+  resultText.innerHTML = `<p class="scan-text">🔎 Iniciando análise...</p>`;
 
-  // ========= ETAPA 2: EVIDÊNCIAS =========
-  await pause(800);
-  addStep("📡 Buscando evidências no conteúdo...");
-  const evidence = evidenceRadar(lowered);
-  await pause(800);
-  if (evidence.found.length) addStep("🧾 Evidências encontradas: " + evidence.found.join(", "));
-  else addStep("⚠️ Nenhuma evidência clara encontrada.");
-  score += evidence.score;
+  const pause = ms => new Promise(r => setTimeout(r, ms));
 
-  // ========= ETAPA 3: EMOÇÃO =========
-  await pause(800);
-  addStep("💬 Avaliando o tom emocional...");
-  const emotion = emotionSensor(lowered);
-  await pause(800);
-  addStep("🧠 Tom detectado: <b>" + emotion.emotion + "</b>");
-  score += emotion.score;
+  const animar = async texto => {
+    resultText.innerHTML = `<p class="scan-text">${texto}</p>`;
+    await pause(900);
+  };
 
-  // ========= ETAPA 4: PALAVRAS =========
-  await pause(800);
-  addStep("🚨 Verificando termos sensacionalistas...");
-  const detected = [];
-  for (const [word, weight] of Object.entries(suspiciousWords)) {
-    if (lowered.includes(word)) {
-      detected.push(word);
-      score -= weight * 4.5;
-    }
-  }
-  await pause(600);
-  if (detected.length) addStep("⚠️ Palavras suspeitas: " + detected.join(", "));
-  else addStep("✅ Nenhum termo suspeito detectado.");
+  // ==============================
+  // 🔵 ANIMAÇÃO — UMA FRASE POR VEZ
+  // ==============================
+  await animar("🌐 Analisando a fonte...");
+  if (trustedSources.some(s => domain.includes(s))) score += 35;
+  else if (mediumReliableSources.some(s => domain.includes(s))) score += 10;
+  else if (blacklistedSources.some(s => domain.includes(s))) score -= 50;
 
-  // ========= AJUSTES =========
-  if (!link.startsWith("https://")) score -= 10;
-  if (domain.includes("-news") || domain.includes("viral")) score -= 8;
+  score += fakeDomainDetector(domain);
+
+  await animar("📄 Avaliando padrões jornalísticos...");
+  score += journalismCheck(lowered);
+
+  await animar("📡 Buscando evidências no conteúdo...");
+  score += evidenceRadar(lowered);
+
+  await animar("💬 Verificando tom emocional...");
+  score += emotionSensor(lowered).score;
+
+  await animar("🚨 Verificando palavras sensacionalistas...");
+  Object.entries(suspiciousWords).forEach(([w, p]) => {
+    if (lowered.includes(w)) score -= p * 4;
+  });
+
+  await animar("🔍 Cruzando informações...");
+  score += crossCheckSimulation(domain);
+
+  // Limita 0–100
   score = Math.max(0, Math.min(100, Math.round(score)));
 
-  // ========= RESULTADO FINAL =========
-  await pause(1200);
-  const [msg, color, emoji] = getVerdict(score);
-  resultText.innerHTML += `
+  const final = getVerdict(score);
+
+  // ==============================
+  // 🔵 RESULTADO FINAL
+  // ==============================
+  resultText.innerHTML = `
     <hr class="divider">
-    <p class="final-result">${emoji} ${msg}</p>
+    <p class="final-result">${final[2]} ${final[0]}</p>
     <p class="final-domain">🌐 Domínio: <b>${domain}</b></p>
-    <p class="final-score">📊 Confiabilidade: <b style="color:${color}">${score}%</b></p>
+    <p class="final-score">📊 Confiabilidade: 
+      <b style="color:${final[1]}">${score}%</b>
+    </p>
   `;
 });
 
-// ======== FUNÇÕES AUXILIARES =========
-function addStep(text) {
-  const p = document.createElement("p");
-  p.classList.add("scan-text");
-  p.innerHTML = text;
-  resultText.appendChild(p);
-}
-
+// ==============================
+// 🔵 AUXILIARES
+// ==============================
 function extractDomain(url) {
   try {
     const u = new URL(url.startsWith("http") ? url : `https://${url}`);
@@ -138,12 +163,13 @@ function extractDomain(url) {
 }
 
 function getVerdict(score) {
-  if (score >= 85) return ["Fonte extremamente confiável!", "lightgreen", "✅"];
+  if (score >= 85) return ["Fonte extremamente confiável!", "lightgreen", "🟢"];
   if (score >= 70) return ["Provável notícia verdadeira.", "gold", "🟡"];
-  if (score >= 45) return ["Conteúdo duvidoso.", "orange", "⚠️"];
-  return ["Alta chance de FAKE NEWS!", "red", "🚨"];
+  if (score >= 45) return ["Conteúdo duvidoso.", "orange", "🟠"];
+  return ["Alta chance de FAKE NEWS!", "red", "🔴"];
 }
 
-function showResult(msg, color) {
-  resultBox.style.di
+function showSimple(msg, color) {
+  resultBox.style.display = "block";
+  resultText.innerHTML = `<p style="color:${color}">${msg}</p>`;
 }

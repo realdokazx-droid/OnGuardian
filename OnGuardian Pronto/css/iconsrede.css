@@ -2,7 +2,7 @@
 .tooltip-container {
   position: absolute;
   top: 90%;
-  left: 45%;
+  left: 50%;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 17px;
@@ -339,7 +339,7 @@
 .box-wrapper {
   position: absolute;
   top: 90%;
-  left: 50%;
+  left: 45%;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 17px;
@@ -500,4 +500,35 @@
   padding-top: 5px;
 }
 
+@media (max-width: 768px) {
+
+  .tooltip-container {
+    position: absolute;
+    top: 90%;
+    left: 5%;
+  }
+    .box-wrapper {
+    position: absolute;
+    top: 90%;
+    left: 84%;
+  }
+    .card-wrapper {
+    position: absolute;
+    top: 90%;
+    left: 45%;
+  }
+
+  .layer,
+  .card-ring,
+  .box-frame {
+    width: 55px;
+    height: 55px;
+  }
+
+  .text,
+  .card-text,
+  .box-text {
+    font-size: 15px;
+  }
+}
 

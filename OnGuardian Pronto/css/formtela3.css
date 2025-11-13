@@ -1,0 +1,176 @@
+/* From Uiverse.io by marcel_4026 */
+.input-wrapper {
+  height: 55px;
+  border-radius: 20px;
+  padding: 5px;
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  background-color: #292524;
+  position: absolute;
+  top: 65%;
+  left: 41%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.input-wrapper:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(162, 89, 255, 0.35);
+}
+
+.input {
+  max-width: 200px;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding-left: 20px;
+  background-color: #292524;
+  color: white;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-bottom: 2px solid #a259ff;
+  background-color: #1d1a19;
+}
+
+.input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #292524 inset;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.Subscribe-btn {
+  height: 100%;
+  width: 150px;
+  border: none;
+  border-radius: 55px;
+  color: #000000;
+  cursor: pointer;
+  background-color: #ffffff;
+  font-weight: 600;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.Subscribe-btn:hover {
+  background-color: #a259ff;
+  color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
+}
+
+@keyframes jello-vertical {
+  0% { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(0.75, 1.25, 1); }
+  40% { transform: scale3d(1.25, 0.75, 1); }
+  50% { transform: scale3d(0.85, 1.15, 1); }
+  65% { transform: scale3d(1.05, 0.95, 1); }
+  75% { transform: scale3d(0.95, 1.05, 1); }
+  100% { transform: scale3d(1, 1, 1); }
+}
+
+.Subscribe-btn:active {
+  transform: scale(0.9);
+}
+
+/* Texto */
+.titulo {
+  position: absolute;
+  top: 35%;
+  left: 4%;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.7em;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+.subtitulo {
+  position: absolute;
+  top: 45%;
+  left: 4%;
+  color: #d6d3d1;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+}
+
+/* Resultado */
+.resultado {
+  position: absolute;
+  top: 30%;
+  left: 4%;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 15px 20px;
+  border-radius: 12px;
+  max-width: 320px;
+  display: none;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.resultado p {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  margin: 0;
+  transition: color 0.5s ease, transform 0.4s ease;
+}
+
+.resultado:hover p {
+  transform: scale(1.03);
+}
+
+/* Animação de entrada suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .titulo {
+    top: 28%;
+    left: 6%;
+    font-size: 1.4em;
+  }
+
+  .subtitulo {
+    top: 36%;
+    left: 6%;
+    font-size: 0.9em;
+  }
+
+  .input-wrapper {
+    top: 66%;
+    left: 6%;
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .input {
+    max-width: 100%;
+    width: 90%;
+    margin-bottom: 10px;
+  }
+
+  .Subscribe-btn {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .resultado {
+    top: 62%;
+    left: 6%;
+    max-width: 90%;
+  }
+}

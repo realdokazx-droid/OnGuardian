@@ -1,0 +1,164 @@
+ .og-logo3 {
+  display: flex;
+  width: 60px;
+  position: absolute;
+  top: 2%;
+  left: 1%;
+}
+
+.nome-onguardian {
+  color: blueviolet;
+  position: absolute;
+  top: 1%;
+  left: 4.6%;
+}
+.nome-onguardian span {
+  color: aliceblue;
+}
+
+.text1 {
+  font-family: 'Inter', sans-serif;
+  color: white;
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  font-size: 36px;  
+}
+
+.text2 {
+  color: rgb(161, 161, 161);
+  position: absolute;
+  top: 35%;
+  left: 41%;
+  font-size: 20px;
+}
+
+.text3 {
+  color: blueviolet;
+  position: absolute;
+  top: 45%;
+  left: 33%;
+  font-size: 35px;
+}
+
+.text4 {
+  color: rgb(161, 161, 161);
+  position: absolute;
+  top: 55%;
+  left: 40%;
+  font-size: 18px;
+}
+
+/* ========= Animações visuais para entrada ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Opcional: atraso diferente se quiser variar */
+.fade-in-delayed {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.3s;
+}
+
+
+/* ===== Responsividade ===== */
+
+/* Tablets (até 992px) */
+@media (max-width: 992px) {
+  .text1 {
+    font-size: 45px;
+    top: 14%;
+  }
+  .text2, .text3 {
+    font-size: 24px;
+  }
+  .text4 {
+    font-size: 16px;
+  }
+}
+
+/* Celulares grandes (até 768px) */
+@media (max-width: 768px) {
+  .og-logo3 {
+    width: 45px;
+    top: 3%;
+    left: 3%;
+  }
+  .nome-onguardian {
+    top: 2%;
+    left: 9%;
+    font-size: 18px;
+  }
+  .text1 {
+    font-size: 35px;
+    top: 15%;
+    left: 8%;
+  }
+  .text2 {
+    font-size: 20px;
+    top: 20%;
+    left: 8%;
+  }
+  .text3 {
+    font-size: 20px;
+    top: 48%;
+    left: 8%;
+  }
+  .text4 {
+    font-size: 14px;
+    top: 65%;
+    left: 8%;
+  }
+}
+
+/* Celulares pequenos (até 480px) */
+@media (max-width: 480px) {
+  .og-logo3 {
+    width: 40px;
+    top: 3%;
+    left: 4%;
+  }
+  .nome-onguardian {
+    top: 2%;
+    left: 12%;
+    font-size: 16px;
+  }
+  .text1 {
+    font-size: 28px;
+    top: 18%;
+    left: 8%;
+    transform: translateX(0);
+  }
+  .text2 {
+    font-size: 18px;
+    top: 38%;
+    left: 8%;
+  }
+  .text3 {
+    font-size: 18px;
+    top: 50%;
+    left: 8%;
+  }
+  .text4 {
+    font-size: 13px;
+    top: 68%;
+    left: 8%;
+  }
+}
+html, body {
+  overflow: auto !important;
+  height: auto !important;
+}

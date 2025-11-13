@@ -1,0 +1,126 @@
+:root {
+  --og-black: #12010a;
+  --og-purple-dark: #6a3e93;
+  --og-purple: #a259ff;
+}
+
+/* ===== Reset e base ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--og-black);
+}
+
+/* ===== Fundo geral ===== */
+.og-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(600px 400px at 10% 20%, rgba(162, 89, 255, 0.12), transparent 15%),
+    radial-gradient(500px 350px at 85% 80%, rgba(162, 89, 255, 0.08), transparent 18%),
+    linear-gradient(135deg, var(--og-purple-dark) 0%, var(--og-black) 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: bgMove 12s ease-in-out infinite alternate;
+  background-size: 120% 120%;
+}
+
+/* ✨ Animação suave de movimento do fundo */
+@keyframes bgMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+
+/* ===== Cartão de conteúdo principal ===== */
+.og-card {
+  position: relative;
+  z-index: 2;
+  padding: 30px 40px;
+  color: #fff;
+  text-align: center;
+}
+
+/* ===== Títulos ===== */
+.og-title {
+  font-size: 35px;
+  margin: 0 0 6px;
+  color: #fff;
+}
+
+.og-title span {
+  color: #8D50AD;
+}
+
+/* ===== Subtítulos ===== */
+.og-subtitle {
+  margin: 0;
+  opacity: 0.85;
+  font-size: 14px;
+}
+
+.og-subtitle2 {
+  margin: 0;
+  opacity: 0.85;
+  font-size: 12px;
+  font-family: "Righteous", sans-serif;
+  color: darkgray;
+}
+
+/* ===== Título central da segunda tela ===== */
+.og-subtitlec2 {
+  font-size: 35px;
+  margin: 0 0 6px;
+  color: #fff;
+  position: absolute;
+  top: 53.5%; /* ligeiramente abaixo do centro */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.og-subtitlec2 span {
+  color: #8D50AD;
+}
+
+/* ===== Mensagem abaixo do loader ===== */
+.mensagem-loader {
+  position: absolute;
+  top: calc(55% + 70px); /* 🔹 um pouco abaixo do loader */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: #8D50AD;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  opacity: 0.8;
+  text-align: center;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 600px) {
+  .og-title {
+    font-size: 28px;
+  }
+
+  .og-subtitlec2 {
+    font-size: 26px;
+    top: 56%;
+  }
+
+  .mensagem-loader {
+    font-size: 11px;
+    top: calc(55% + 60px);
+  }
+}

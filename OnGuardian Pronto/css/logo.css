@@ -1,0 +1,40 @@
+.og-container {
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.og-logo {
+  width: 150px;
+  transition: transform 0.4s ease, opacity 0.5s ease;
+  cursor: pointer;
+}
+.og-logo2 {
+  width: 150px;
+  max-width: 35vw;
+  position: absolute;
+  top: 38%; /* diminua para subir */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.og-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10vh; /* ajusta posição vertical */
+}
+
+.og-logo:hover {
+  transform: scale(1.1);
+}
+
+.fade-out {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}

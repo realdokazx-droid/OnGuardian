@@ -1,0 +1,59 @@
+@media (max-width: 768px) {
+/* Icones Redes Sociais*/
+    .tooltip-container {
+    top: 90%;
+    left: 20%;
+    max-width: 90%;
+}
+
+.card-wrapper {
+    top: 90%;
+    left: 50%;
+    max-width: 90%;
+}
+
+.box-wrapper {
+    top: 90%;
+    left: 80%;
+    max-width: 90%;
+}
+/* Verificação*/
+  .titulo {
+    top: 28%;
+    left: 6%;
+    font-size: 1.4em;
+  }
+
+  .subtitulo {
+    top: 36%;
+    left: 6%;
+    font-size: 0.9em;
+  }
+
+  .input-wrapper {
+    top: 48%;
+    left: 6%;
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .input {
+    max-width: 100%;
+    width: 90%;
+    margin-bottom: 10px;
+  }
+
+  .Subscribe-btn {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .resultado {
+    top: 62%;
+    left: 6%;
+    max-width: 90%;
+
+
+  }
+}

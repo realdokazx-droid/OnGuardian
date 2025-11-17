@@ -1,193 +1,203 @@
-/* From Uiverse.io by marcel_4026 */
-.input-wrapper {
-  height: 55px;
-  border-radius: 20px;
-  padding: 5px;
-  box-sizing: content-box;
-  display: flex;
-  align-items: center;
-  background-color: #292524;
-  position: absolute;
-  top: 65%;
-  left: 41%;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-.input-wrapper:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 15px rgba(162, 89, 255, 0.35);
-}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnGuardian</title>
+  <link rel="stylesheet" href="css/background.css">
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/logo.css">
+  <link rel="stylesheet" href="css/telas.css">
+  <link rel="stylesheet" href="css/principal.css">
+  <link rel="stylesheet" href="css/formtela3.css">
+  <link rel="stylesheet" href="css/iconsrede.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/iconsfonte.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/responsividade.css">
+  <link rel="stylesheet" href="css/language.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-.input {
-  max-width: 200px;
-  height: 100%;
-  border: none;
-  outline: none;
-  padding-left: 20px;
-  background-color: #292524;
-  color: white;
-  font-size: 1.1em;
-  transition: all 0.3s ease;
-}
+</head>
 
-.input:focus {
-  border-bottom: 2px solid #a259ff;
-  background-color: #1d1a19;
-}
+<body>
+  <main id="app">
+    <!-- Tela 1 -->
+    <div class="og-bg" id="conteudo1">
+      <div class="og-card og-container">
+        <img class="og-logo" id="logo" src="assets/img/logo.png" alt="OnGuardian"> <!-- Logo da Primeira Tela -->
+        <h1 class="og-title">On <span>Guardian</span></h1> <!-- Texto OnGuardian da Primeira Tela -->
+        <p class="og-subtitle">Detectamos mentiras, apresentamos verdades.</p> <!-- Texto da Primeira Tela -->
+        <p class="og-subtitle2">Clique na logo para entrar.</p> <!-- SubTexto da Primeira Tela -->
+      </div>
+    </div>
 
-.input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #292524 inset;
-  -webkit-text-fill-color: #ffffff;
-}
+    <!-- Tela 2 (Loader) -->
+    <div class="og-bg2" id="conteudo2" style="display:none; opacity:0;">
+      <div class="og-card2 og-container2">
+        <img class="og-logo2" id="logo2" src="assets/img/logo.png" alt="OnGuardian">
+        <h1 class="mensagem-loader">Preparando tudo para você...</h1>
+        <h2 class="og-subtitlec2">On <span>Guardian</span></h2>
+        <div class="loader"><span class="load"></span></div>
+      </div>
+    </div>
 
-.Subscribe-btn {
-  height: 100%;
-  width: 150px;
-  border: none;
-  border-radius: 55px;
-  color: #000000;
-  cursor: pointer;
-  background-color: #ffffff;
-  font-weight: 600;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: all 0.3s ease;
-  font-size: 20px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-}
+    <!-- Tela 3 (conteúdo final do site) -->
+    <div class="og-bg3" id="conteudo3" style="display:none; opacity:0;">
+      <div class="og-card3">
+        <h1 class="nome-onguardian">On <span>Guardian</span></h1>
+        <img class="og-logo3" src="assets/img/logo.png" alt="OnGuardian">
+        <h1 class="text1">Confirme a veracidade <br>de qualquer notícia em <br>segundos.</h1>
+        <p class="text2">Cole o link e receba uma analise clara e <br>confiável, baseada em fontes verificadas
+          <br>e métodos de checagem profissional.
+        </p>
+        <h2 class="text3">Informação Segura é a sua melhor defesa</h2>
+        <p class="text4">Descubra em instantes se a notícia é confiável ou não.</p>
+      </div>
 
-.Subscribe-btn:hover {
-  background-color: #a259ff;
-  color: #ffffff;
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
-}
+      <!-- Sistema e botao de Verificar Noticia -->
+<div class="input-wrapper">
+  <input placeholder="Coloque o link da notícia.ㅤㅤㅤ" class="input" name="text" type="text" id="newsLink" />
+  <button class="Subscribe-btn" id="verifyBtn">Verificar</button>
 
-@keyframes jello-vertical {
-  0% { transform: scale3d(1, 1, 1); }
-  30% { transform: scale3d(0.75, 1.25, 1); }
-  40% { transform: scale3d(1.25, 0.75, 1); }
-  50% { transform: scale3d(0.85, 1.15, 1); }
-  65% { transform: scale3d(1.05, 0.95, 1); }
-  75% { transform: scale3d(0.95, 1.05, 1); }
-  100% { transform: scale3d(1, 1, 1); }
-}
+  <!-- botão pequeno de limpar -->
+  <button id="clearBtn" class="clear-btn">X</button>
+</div>
 
-.Subscribe-btn:active {
-  transform: scale(0.9);
-}
+<div id="resultBox" class="resultado">
+  <p id="resultText"></p>
+</div>
 
-/* Texto */
-.titulo {
-  position: absolute;
-  top: 35%;
-  left: 4%;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-size: 1.7em;
-  font-weight: 600;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-}
+      <!-- Instagram -->
+      <div class="tooltip-container">
+        <div class="tooltip">
+          <div class="profile">
+            <div class="user">
+              <div class="img">IN</div>
+              <div class="details">
+                <div class="name">On Guardian</div>
+                <div class="username">@onguardian</div>
+              </div>
+            </div>
+            <div class="about">500+M Seguidores</div>
+          </div>
+        </div>
+        <div class="text">
+          <a class="icon" href="#">
+            <div class="layer">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span class="instagramSVG">
+                <svg fill="white" class="svgIcon" viewBox="0 0 448 512" height="1.5em"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
+                  </path>
+                </svg>
+              </span>
+            </div>
+            <div class="text">Instagram</div>
+          </a>
+        </div>
+      </div>
+      <!-- Facebook  -->
+      <div class="card-wrapper">
+        <div class="card-popup">
+          <div class="card-info">
+            <div class="card-user">
+              <div class="card-avatar">FB</div>
+              <div class="card-meta">
+                <div class="card-name">On Guardian</div>
+                <div class="card-handle">@onguardian</div>
+              </div>
+            </div>
+            <div class="card-stats">500+M Seguidores</div>
+          </div>
+        </div>
 
-.subtitulo {
-  position: absolute;
-  top: 45%;
-  left: 4%;
-  color: #d6d3d1;
-  font-family: "Poppins", sans-serif;
-  font-size: 1em;
-}
+        <div class="card-main">
+          <a class="card-link" href="#">
+            <div class="card-ring">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span class="card-icon">
+                <svg viewBox="0 0 40 40" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                  <linearGradient gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(40 0 0 -39.7778 11115.001 16212.334)" y2="407.5726" y1="406.6018"
+                    x2="-277.375" x1="-277.375" id="a">
+                    <stop stop-color="#0062e0" offset="0"></stop>
+                    <stop stop-color="#19afff" offset="1"></stop>
+                  </linearGradient>
+                  <path
+                    d="M16.7 39.8C7.2 38.1 0 29.9 0 20 0 9 9 0 20 0s20 9 20 20c0 9.9-7.2 18.1-16.7 19.8l-1.1-.9h-4.4l-1.1.9z"
+                    fill="url(#a)"></path>
+                  <path
+                    d="m27.8 25.6.9-5.6h-5.3v-3.9c0-1.6.6-2.8 3-2.8H29V8.2c-1.4-.2-3-.4-4.4-.4-4.6 0-7.8 2.8-7.8 7.8V20h-5v5.6h5v14.1c1.1.2 2.2.3 3.3.3 1.1 0 2.2-.1 3.3-.3V25.6h4.4z"
+                    fill="#fff"></path>
+                </svg>
+              </span>
+            </div>
+            <div class="card-text">Facebook</div>
+          </a>
+        </div>
+      </div>
+      <!-- Discord  -->
+      <div class="box-wrapper">
+        <div class="box-popup">
+          <div class="box-info">
+            <div class="box-user">
+              <div class="box-avatar">DC</div>
+              <div class="box-meta">
+                <div class="box-name">On Guardian</div>
+                <div class="box-handle">@onguardian</div>
+              </div>
+            </div>
+            <div class="box-extra">200+M Seguidores</div>
+          </div>
+        </div>
 
-/* Resultado */
-.resultado {
-  position: absolute;
-  top: 30%;
-  left: 4%;
-  background-color: rgba(255, 255, 255, 0.08);
-  padding: 15px 20px;
-  border-radius: 12px;
-  max-width: 200px;
-  display: none;
-  transition: all 0.4s ease;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
-  animation: fadeIn 0.5s ease forwards;
-}
+        <div class="box-main">
+          <a class="box-link" href="#">
+            <div class="box-frame">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span class="box-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36">
+                  <path fill="#5865f2"
+                    d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.19h0A105.73,105.73,0,0,0,32.71,96.36a77.7,77.7,0,0,0,6.58-10.64,68.42,68.42,0,0,1-10.38-5c.87-.63,1.73-1.28,2.55-1.95a75.57,75.57,0,0,0,65.14,0c.83.68,1.69,1.33,2.55,2a68.68,68.68,0,0,1-10.41,5,77.31,77.31,0,0,0,6.58,10.64A105.38,105.38,0,0,0,126.6,80.22h0C129.24,53.41,122.09,29.64,107.7,8.07ZM42.45,65.69c-6.31,0-11.49-5.79-11.49-12.9s5.06-12.93,11.49-12.93S54,45.62,53.9,52.79,48.82,65.69,42.45,65.69Zm42.24,0c-6.31,0-11.49-5.79-11.49-12.9s5.06-12.93,11.49-12.93S96.19,45.62,96.11,52.79,91,65.69,84.69,65.69Z" />
+                </svg>
+              </span>
+            </div>
+            <div class="box-text">Discord</div>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
 
-.resultado p {
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-size: 1em;
-  margin: 0;
-  transition: color 0.5s ease, transform 0.4s ease;
-}
+    </div>
 
-.resultado:hover p {
-  transform: scale(1.03);
-}
+    </div>
+  </main>
 
-/* Animação de entrada suave */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .titulo {
-    top: 28%;
-    left: 6%;
-    font-size: 1.4em;
-  }
+  <script src="js/background.js"></script>
+  <script src="js/logo.js"></script>
+  <script src="js/verificar.js"></script>
 
-  .subtitulo {
-    top: 36%;
-    left: 6%;
-    font-size: 0.9em;
-  }
+</body>
 
-  .input-wrapper {
-    top: 47%;
-    left: 6%;
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-  }
-
-  .input {
-    max-width: 100%;
-    width: 90%;
-    margin-bottom: 10px;
-  }
-
-  .Subscribe-btn {
-    width: 100%;
-    font-size: 1em;
-  }
-
-  .resultado {
-    top: 65%;
-    left: 6%;
-    max-width: 200px;
-
-  }
-}
-
-.clear-btn {
-  padding: 3px 6px;
-  font-size: 10px;
-  margin-left: 6px;
-  border-radius: 6px;
-  cursor: pointer;
-  background: #444;
-  color: #fff;
-  border: none;
-  transition: 0.2s;
-}
-
-.clear-btn:hover {
-  background: #666;
-}
+</html>

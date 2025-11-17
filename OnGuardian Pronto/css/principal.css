@@ -154,7 +154,7 @@
   }
   .text4 {
     font-size: 13px;
-    top: 56%;
+    top: 60%;
     left: 8%;
   }
 }
@@ -162,4 +162,5 @@ html, body {
   overflow: auto !important;
   height: auto !important;
 }
+
 

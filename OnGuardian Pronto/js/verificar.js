@@ -232,3 +232,14 @@ verifyBtn.addEventListener("click", async () => {
 
 // helpers finais
 function escapeHtml(str){ return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+// botão de limpar o link
+document.getElementById("clearBtn").addEventListener("click", () => {
+  const input = document.getElementById("newsLink");
+  input.value = "";
+  input.focus();
+
+  // limpa também a caixa de resultado (opcional)
+  // basta deletar esta parte se não quiser limpar o resultado
+  resultBox.style.display = "none";
+  resultText.innerHTML = "";
+});
